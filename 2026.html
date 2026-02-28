@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Hierarchical Online Exam Platform</title>
+<style>
+body{
+    font-family:Arial;
+    margin:0;
+    background:linear-gradient(to right,#e3f2fd,#fff3e0);
+}
+header{
+    background:#4fc3f7;
+    color:white;
+    padding:15px;
+    text-align:center;
+}
+nav{
+    background:orange;
+    padding:10px;
+    text-align:center;
+}
+nav button{
+    margin:5px;
+    padding:10px 20px;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+    color:white;
+}
+nav button:hover{
+    background:#f57c00;
+}
+.container{
+    width:90%;
+    max-width:1200px;
+    margin:auto;
+    padding:20px;
+}
+.card{
+    background:white;
+    padding:20px;
+    margin-top:20px;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.1);
+}
+input, select{
+    width:95%;
+    padding:8px;
+    margin:5px;
+}
+.timer{
+    color:red;
+    font-size:20px;
+    font-weight:bold;
+}
+.progress{
+    height:20px;
+    background:#ddd;
+    border-radius:10px;
+}
+.progress-bar{
+    height:20px;
+    background:orange;
+    border-radius:10px;
+    width:0;
+}
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:15px;
+}
+.stat{
+    background:#e3f2fd;
+    padding:15px;
+    border-radius:10px;
+    text-align:center;
+}
+.chatbox{
+    height:200px;
+    overflow:auto;
+    border:1px solid #ccc;
+    padding:10px;
+}
+</style>
+</head>
+<body>
+
+<header>
+<h1>Hierarchical Model Paper Learning System</h1>
+</header>
+
+<nav>
+<button onclick="showPage('studentRegister')">Student Register</button>
+<button onclick="showPage('studentLogin')">Student Login</button>
+<button onclick="showPage('teacherRegister')">Teacher Register</button>
+<button onclick="showPage('teacherPanel')">Teacher Panel</button>
+<button onclick="showPage('examStart')">Exam</button>
+<button onclick="showPage('progressCard')">Progress</button>
+<button onclick="showPage('aiCard')">AI Chat</button>
+</nav>
+
+<div class="container">
+
+<!-- Student Registration -->
+<div id="studentRegister" class="card">
+<h2>Student Registration</h2>
+<input id="regName" placeholder="Student Name">
+<input id="regNIC" placeholder="NIC">
+<input id="regAdmin" placeholder="Admin Number">
+<input id="regPass" placeholder="Password">
+<button onclick="registerStudent()">Register</button>
+<p id="regMsg"></p>
+</div>
+
+<!-- Student Login -->
+<div id="studentLogin" class="card" style="display:none;">
+<h2>Student Login</h2>
+<input id="loginNIC" placeholder="NIC">
+<input id="loginPass" placeholder="Password">
+<button onclick="loginStudent()">Login</button>
+<p id="loginMsg"></p>
+</div>
+
+<!-- Teacher Registration -->
+<div id="teacherRegister" class="card" style="display:none;">
+<h2>Teacher Registration</h2>
+<input id="tName" placeholder="Teacher Name">
+<input id="tCode" placeholder="Secret Code">
+<button onclick="registerTeacher()">Register</button>
+<p id="tMsg"></p>
+</div>
+
+<!-- Teacher Panel -->
+<div id="teacherPanel" class="card" style="display:none;">
+<h2>Teacher Panel - Add Model Paper</h2>
+<input id="paperTitle" placeholder="Paper Title">
+<input id="question" placeholder="Question">
+<input id="answer" placeholder="Correct Answer">
+<input id="zoomLink" placeholder="Zoom Recording Link">
+<input id="timeLimit" placeholder="Time Limit (seconds)">
+<button onclick="addPaper()">Upload Paper</button>
+<p id="paperMsg"></p>
+</div>
+
+<!-- Exam Start -->
+<div id="examStart" class="card" style="display:none;">
+<h2>Start Exam</h2>
+<input id="nicCheck" placeholder="Confirm NIC">
+<input id="adminCheck" placeholder="Confirm Admin No">
+<select id="paperList"></select>
+<button onclick="verifyStudent()">Start Paper</button>
+<p id="examTimer"></p>
+</div>
+
+<!-- Exam -->
+<div id="examArea" class="card" style="display:none;">
+<h2 id="examTitle"></h2>
+<p id="examQuestion"></p>
+<input id="studentAnswer" placeholder="Your Answer">
+<button onclick="submitExam()">Submit Exam</button>
+</div>
+
+<!-- Results -->
+<div id="resultCard" class="card">
+<h2>Result</h2>
+<p id="result"></p>
+</div>
+
+<!-- Marking Scheme -->
+<div id="schemeCard" class="card">
+<h2>Marking Scheme</h2>
+<p id="scheme"></p>
+</div>
